@@ -27,8 +27,8 @@ export APACHE_MIRROR_HOST="http://apache.mirrors.tds.net"
 
 # curl -L ftp://mcrypt.hellug.gr/pub/crypto/mcrypt/libmcrypt/libmcrypt-2.5.7.tar.gz -o /tmp/libmcrypt-2.5.7.tar.gz
 # curl -L ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/cyrus-sasl-2.1.25.tar.gz -o /tmp/cyrus-sasl-2.1.25.tar.gz
-echo "downloading libmemcached"
-curl -L https://launchpad.net/libmemcached/1.0/1.0.16/+download/libmemcached-1.0.16.tar.gz -o /tmp/libmemcached-1.0.16.tar.gz
+# echo "downloading libmemcached"
+# curl -L https://launchpad.net/libmemcached/1.0/1.0.16/+download/libmemcached-1.0.16.tar.gz -o /tmp/libmemcached-1.0.16.tar.gz
 echo "downloading PCRE"
 curl -L ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.32.tar.gz -o /tmp/pcre-8.32.tar.gz
 echo "downloading apr"
@@ -100,7 +100,7 @@ ${MAKE}
 ${MAKE} install
 
 /app/php/bin/pear config-set php_dir /app/php
-echo " " | /app/php/bin/pecl install memcache
+# echo " " | /app/php/bin/pecl install memcache
 echo " " | /app/php/bin/pecl install apc-3.1.13
 echo " " | /app/php/bin/pecl install mongo
 /app/php/bin/pecl install igbinary
@@ -110,26 +110,20 @@ echo " " | /app/php/bin/pecl install mongo
 # ${MAKE} && ${MAKE} install
 # export SASL_PATH=/app/local/lib/sasl2
 
-cd /tmp/libmemcached-1.0.16
-./configure --prefix=/app/local
-# the configure script detects sasl, but is still foobar'ed
-# sed -i 's/LIBMEMCACHED_WITH_SASL_SUPPORT 0/LIBMEMCACHED_WITH_SASL_SUPPORT 1/' Makefile
-${MAKE} && ${MAKE} install
-
-cd /tmp/memcached-2.1.0
-/app/php/bin/phpize
-./configure --with-libmemcached-dir=/app/local \
-  --prefix=/app/php \
-  --enable-memcached-igbinary \
-  --enable-memcached-json \
-  --with-php-config=/app/php/bin/php-config \
-  --enable-static
-${MAKE} && ${MAKE} install
-
-# cd /tmp/zip-1.10.2
-# /app/php/bin/phpize
-# ./configure --prefix=/app/php --with-php-config=/app/php/bin/php-config --enable-static
+# cd /tmp/libmemcached-1.0.16
+# ./configure --prefix=/app/local
 # ${MAKE} && ${MAKE} install
+
+# cd /tmp/memcached-2.1.0
+# /app/php/bin/phpize
+# ./configure --with-libmemcached-dir=/app/local \
+#   --prefix=/app/php \
+#   --enable-memcached-igbinary \
+#   --enable-memcached-json \
+#   --with-php-config=/app/php/bin/php-config \
+#   --enable-static
+# ${MAKE} && ${MAKE} install
+
 
 echo '2.4.6' > /app/apache/VERSION
 echo '5.5.4' > /app/php/VERSION
@@ -142,7 +136,7 @@ cp -a /app/php /tmp/build/
 # cp -aL /usr/lib/libmysqlclient.so.16 /tmp/build/local/lib/
 # cp -aL /app/local/lib/libhashkit.so.2 /tmp/build/local/lib/
 cp -aL /app/local/lib/libmcrypt.so.4 /tmp/build/local/lib/
-cp -aL /app/local/lib/libmemcached.so.11 /tmp/build/local/lib/
+# cp -aL /app/local/lib/libmemcached.so.11 /tmp/build/local/lib/
 cp -aL /app/local/lib/libpcre.so.1 /tmp/build/local/lib/
 # cp -aL /app/local/lib/libmemcachedprotocol.so.0 /tmp/build/local/lib/
 # cp -aL /app/local/lib/libmemcachedutil.so.2 /tmp/build/local/lib/

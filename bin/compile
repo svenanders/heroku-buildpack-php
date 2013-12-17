@@ -112,7 +112,8 @@ chmod 0777 \$PHP_ERROR_LOG
 tail -F /app/apache/logs/error_log &
 tail -F /app/apache/logs/access_log &
 tail -F \$PHP_ERROR_LOG &
-export LD_LIBRARY_PATH=/app/local/lib
+export PATH=$PATH:/app/www/vendor/ffmpeg/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/local/lib:/app/www/vendor/ffmpeg/lib
 export PHP_INI_SCAN_DIR=/app/www
 
 # let's check for hook scripts

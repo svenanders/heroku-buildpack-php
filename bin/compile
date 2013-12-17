@@ -130,7 +130,21 @@ echo "Launching apache"
 exec /app/apache/bin/httpd -DNO_DETACH
 EOF
 
+cat >>queue.sh <<EOF
+export PHP_ERROR_LOG=\`/app/php/bin/php -i | grep error_log | grep -v opcache | awk '{print \$5}'\`
+touch \$PHP_ERROR_LOG
+chmod 0777 \$PHP_ERROR_LOG
+tail -F \$PHP_ERROR_LOG &
+export PATH=$PATH:/app/www/vendor/ffmpeg/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/local/lib:/app/www/vendor/ffmpeg/lib
+export PHP_INI_SCAN_DIR=/app/www
+
+echo "Launching PHP CLI"
+/app/php/bin/php -f /app/www/queue.php -c /app/www
+EOF
+
 chmod +x boot.sh
+chmod +x queue.sh
 
 # clean the cache
 rm -rf $CACHE_DIR/*

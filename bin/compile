@@ -140,6 +140,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/app/local/lib:/app/www/vendor/ffmpeg/li
 export PHP_INI_SCAN_DIR=/app/www
 
 echo "Launching PHP CLI"
+cd /app/www
 /app/php/bin/php -f /app/www/queue.php -c /app/www
 EOF
 

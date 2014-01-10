@@ -103,6 +103,7 @@ ${MAKE} install
 # echo " " | /app/php/bin/pecl install memcache
 echo " " | /app/php/bin/pecl install apc-3.1.13
 echo " " | /app/php/bin/pecl install mongo
+echo " " | /app/php/bin/pecl install SPL_Types
 /app/php/bin/pecl install igbinary
 
 # cd /tmp/cyrus-sasl-2.1.25

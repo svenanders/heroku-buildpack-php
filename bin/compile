@@ -33,6 +33,13 @@ if [ -f www/Procfile ]; then
   mv www/Procfile .
 fi
 
+function indent() {
+  c='s/^/       /'
+  case $(uname) in
+    Darwin) sed -l "$c";;
+    *)      sed -u "$c";;
+  esac
+}
 
 # PHP
 echo "-----> Installing PHP"

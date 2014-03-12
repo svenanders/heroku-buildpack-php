@@ -33,6 +33,36 @@ if [ -f www/Procfile ]; then
   mv www/Procfile .
 fi
 
+
+# PHP
+echo "-----> Installing PHP"
+if [ -f "$PHP_FILE" ]
+then
+  if check_md5 "${PHP_FILE}"
+  then
+    echo "Bundling PHP v${PHP_VERSION}" | indent
+    download_url $PHP_URL
+  else
+    echo "Using cached PHP v${PHP_VERSION}" | indent
+  fi
+else
+  echo "Bundling PHP v${PHP_VERSION}" | indent
+  download_url $PHP_URL
+fi
+
+mkdir -p ${BUILD_DIR}/vendor/php
+tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
+
+# create extension dir for php
+if [ ! -f "${BUILD_DIR}/vendor/php/ext" ]
+then
+    mkdir ${BUILD_DIR}/vendor/php/ext
+fi
+
+# copy mongo.so
+cp $LP_DIR/ext/mongo.so ${BUILD_DIR}/vendor/php/ext/mongo.so
+
+
 echo "-----> Extracting Apache $APACHE_VERSION PHP $PHP_VERSION build $BUILDPACK_VERSION"
 echo "-----> from $OPT_BUILDPACK_URL"
 curl --silent --max-time 60 --location "$OPT_BUILDPACK_URL" | tar xz

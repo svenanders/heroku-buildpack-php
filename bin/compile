@@ -52,21 +52,6 @@ function download_url() {
 TARGET_URL="$1"
 curl -s -S -O -L -m 300 --connect-timeout 60 "$TARGET_URL"
 }
-# PHP
-echo "-----> Installing PHP"
-if [ -f "$PHP_FILE" ]
-then
-  if check_md5 "${PHP_FILE}"
-  then
-    echo "Bundling PHP v${PHP_VERSION}" | indent
-    download_url $PHP_URL
-  else
-    echo "Using cached PHP v${PHP_VERSION}" | indent
-  fi
-else
-  echo "Bundling PHP v${PHP_VERSION}" | indent
-  download_url $PHP_URL
-fi
 
 mkdir -p ${BUILD_DIR}/vendor/php
 tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php

@@ -33,6 +33,7 @@ if [ -f www/Procfile ]; then
   mv www/Procfile .
 fi
 
+
 function indent() {
   c='s/^/       /'
   case $(uname) in
@@ -53,17 +54,6 @@ TARGET_URL="$1"
 curl -s -S -O -L -m 300 --connect-timeout 60 "$TARGET_URL"
 }
 
-mkdir -p ${BUILD_DIR}/vendor/php
-tar xzf ${PHP_FILE} -C ${BUILD_DIR}/vendor/php
-
-# create extension dir for php
-if [ ! -f "${BUILD_DIR}/vendor/php/ext" ]
-then
-    mkdir ${BUILD_DIR}/vendor/php/ext
-fi
-
-# copy mongo.so
-cp $LP_DIR/ext/mongo.so ${BUILD_DIR}/vendor/php/ext/mongo.so
 
 
 echo "-----> Extracting Apache $APACHE_VERSION PHP $PHP_VERSION build $BUILDPACK_VERSION"

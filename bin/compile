@@ -71,8 +71,6 @@ cd bin
 ln -s ../php/bin/php php
 cd ..
 
-echo "LOCATING MONGO :SO"
-locate mongo.so
 
 export LD_LIBRARY_PATH=$BUILD_DIR/local/lib
 export PATH=$PATH:$BUILD_DIR/bin

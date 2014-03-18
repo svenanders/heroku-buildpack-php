@@ -71,7 +71,7 @@ cd ..
 
 
 echo "-----> INSTALLING MONGO VIA PECL"
-sudo pecl install mongo
+pecl install mongo
 
 
 

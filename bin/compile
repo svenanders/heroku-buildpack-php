@@ -70,8 +70,6 @@ ln -s ../php/bin/php php
 cd ..
 
 
-echo "-----> INSTALLING MONGO VIA PECL"
-pecl install mongo
 
 
 

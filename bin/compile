@@ -182,6 +182,9 @@ chmod +x queue.sh
 rm -rf $CACHE_DIR/*
 
 
+echo "-----> LISTING MONGO.SO FOLDER AGAIN"
+ls /app/php/lib/php/extensions/no-debug-non-zts-20121212/
+
 
 # run a post build script from the app
 

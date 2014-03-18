@@ -173,6 +173,10 @@ chmod +x queue.sh
 # clean the cache
 rm -rf $CACHE_DIR/*
 
+# copy mongo.so
+cp $LP_DIR/ext/mongo.so /app/php/lib/php/extensions/no-debug-non-zts-20121212/mongo.so
+
+
 # run a post build script from the app
 
 if [ -d $BUILD_DIR/www/.heroku -a -f $BUILD_DIR/www/.heroku/compile.sh ]; then

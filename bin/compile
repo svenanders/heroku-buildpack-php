@@ -54,8 +54,6 @@ TARGET_URL="$1"
 curl -s -S -O -L -m 300 --connect-timeout 60 "$TARGET_URL"
 }
 
-
-
 echo "-----> Extracting Apache $APACHE_VERSION PHP $PHP_VERSION build $BUILDPACK_VERSION"
 echo "-----> from $OPT_BUILDPACK_URL"
 curl --silent --max-time 60 --location "$OPT_BUILDPACK_URL" | tar xz
@@ -70,6 +68,11 @@ mkdir bin
 cd bin
 ln -s ../php/bin/php php
 cd ..
+
+
+echo "-----> INSTALLING MONGO VIA PECL"
+sudo pecl install mongo
+
 
 
 export LD_LIBRARY_PATH=$BUILD_DIR/local/lib

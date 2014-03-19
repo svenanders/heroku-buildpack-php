@@ -64,12 +64,14 @@ cp $LP_DIR/conf/php.ini php
 cp $LP_DIR/conf/php-fpm.conf $BUILD_DIR/php/etc/
 
 # copy mongo.so
-echo "-----> COPYING MONGO.SO"
 mkdir -p /app/php/lib/php/extensions/no-debug-non-zts-20121212/
 cp $LP_DIR/ext/mongo.so /app/php/lib/php/extensions/no-debug-non-zts-20121212/mongo.so
 
-echo "-----> LISTING MONGO.SO FOLDER"
 ls /app/php/lib/php/extensions/no-debug-non-zts-20121212/
+
+echo "-----> INSTALLING MONGO via GEM"
+gem install mongo
+
 
 # make php available on bin wtih symbolic link, use relative path so it works when remounted
 mkdir bin
